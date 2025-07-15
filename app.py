@@ -60,7 +60,7 @@ def deepseek_llama_reply():
             }
         ]
     )
-    completion = client.chat.completions.create(
+    completion2 = client.chat.completions.create(
         model="llama-3.1-8b-instant",
         messages=[
             {
@@ -69,7 +69,7 @@ def deepseek_llama_reply():
             }
         ]
     )
-    return(render_template("deepseek_llama_reply.html",r=completion.choices[0].message.content))
+    return(render_template("deepseek_llama_reply.html",r=completion.choices(0).message.content,r2=completion2.choices[0].message.content))
 
 @app.route("/deepseek",methods=["GET","POST"])
 def deepseek():

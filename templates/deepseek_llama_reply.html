@@ -6,7 +6,13 @@
 </head>
 <body>
     <div class="container">
-        <h2>deepseek & llama reply : {{r}}</h2>
+        <h2>deepseek reply : {{r}}</h2>
+        <form action="/main" method="post">
+            <input type="submit" value="Main">
+        </form>
+    </div>
+    <div class="container">
+        <h2>llama reply : {{r2}}</h2>
         <form action="/main" method="post">
             <input type="submit" value="Main">
         </form>
