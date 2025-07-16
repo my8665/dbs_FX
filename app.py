@@ -75,7 +75,7 @@ def prediction():
 @app.route("/telegram",methods=["GET","POST"])
 def telegram():
 
-    domain_url = 'https://dsat-ft1-ipop.onrender.com'
+    domain_url = 'https://dbs-fx.onrender.com'
 
     # The following line is used to delete the existing webhook URL for the Telegram bot
     delete_webhook_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook"
