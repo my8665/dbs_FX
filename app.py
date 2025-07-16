@@ -1,9 +1,11 @@
+
 from flask import Flask, render_template, request
 import joblib
 from groq import Groq
 import requests
+
 import os
-Telegram_bot_Token = os.getenv("Telegram_bot_Token")
+TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 
 app = Flask(__name__)
 
@@ -73,19 +75,18 @@ def prediction():
 @app.route("/telegram",methods=["GET","POST"])
 def telegram():
 
-    domain_url = 'https://dbs-fx.onrender.com'
+    domain_url = 'https://dsat-ft1-ipop.onrender.com'
 
     # The following line is used to delete the existing webhook URL for the Telegram bot
-    delete_webhook_url = f"https://api.telegram.org/bot{Telegram_bot_Token}/deleteWebhook"
+    delete_webhook_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/deleteWebhook"
     requests.post(delete_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
 
     # Set the webhook URL for the Telegram bot
-    set_webhook_url = f"https://api.telegram.org/bot{Telegram_bot_Token}/setWebhook?url={domain_url}/webhook"
+    set_webhook_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/setWebhook?url={domain_url}/webhook"
     webhook_response = requests.post(set_webhook_url, json={"url": domain_url, "drop_pending_updates": True})
-
     if webhook_response.status_code == 200:
         # set status message
-        status = "The telegram bot is running. Please check with the telegram bot. @your_bot"
+        status = "The telegram bot is running. Please check with the telegram bot. @sctp1f_tt_bot"
     else:
         status = "Failed to start the telegram bot. Please check the logs."
     
@@ -115,7 +116,7 @@ def webhook():
         response_message = completion_ds.choices[0].message.content
 
         # Send the response back to the Telegram chat
-        send_message_url = f"https://api.telegram.org/bot{telegram}/sendMessage"
+        send_message_url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendMessage"
         requests.post(send_message_url, json={
             "chat_id": chat_id,
             "text": response_message
@@ -124,5 +125,4 @@ def webhook():
 
 if __name__ == "__main__":
     app.run()
-
 
